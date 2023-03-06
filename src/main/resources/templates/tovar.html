@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Товар</title>
+    <center>
+        <a href="/poctsvchik" style="font-family:Monotype Corsiva;color:#3CB371;font-size:25px">Поставки</a>
+        | <a href="/licenziya" style="font-family:Monotype Corsiva;color:#3CB371;font-size:25px">Лицензии</a>
+     | <a style="font-family:Monotype Corsiva;color:#3CB371;font-size:25px">Товары</a>
+     | <a href="/check" style="font-family:Monotype Corsiva;color:#3CB371;font-size:25px">Чеки</a>
+     | <a href="/vozvrat" style="font-family:Monotype Corsiva;color:#3CB371;font-size:25px">Возвраты</a>
+        | <a href="/employee" style="font-family:Monotype Corsiva;color:#3CB371;font-size:25px">Пользователи</a>
+        | <a href="/nakladnaya" style="font-family:Monotype Corsiva;color:#3CB371;font-size:25px">Накладные</a>
+    </center>
+</head>
+<body>
+<form th:action="${'/tovar/add'}" method="post">
+    <div class="form-group">
+        <label for="formGroupExampleInput">Название товара</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" name="nameTovar" placeholder="Введите название товара">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="formGroupExampleInput2">Цена</label>
+        <input type="number" class="form-control" id="formGroupExampleInput2" name="costTovar" placeholder="Введите цену товара">
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="formGroupExampleInput3">Количество</label>
+        <input type="number" class="form-control" id="formGroupExampleInput3" name="kolvoTovar" placeholder="Введите количество товара">
+    </div>
+    <br>
+    <select name="namePoctsvchik" class="form-select" aria-label="Default select example">
+        <div th:each="element : ${poctsvchik}">
+            <option th:text="${element.namePoctsvchik}"></option>
+        </div>
+    </select>
+    <br>
+    <select name="nameTov" class="form-select" aria-label="Default select example">
+        <div th:each="element : ${licenziya}">
+            <option th:text="${element.nameTov}"></option>
+        </div>
+    </select>
+    <br>
+    <button type="submit" class="btn btn-outline-success">Добавить товар</button>
+
+</form>
+<form action="/tovar/filter">
+    <button class="btn btn-outline-success">Поиск</button>
+</form>
+<br>
+<table class="table1">
+    <tr>
+        <th>Товар</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Поставщик</th>
+        <th>Лицензия</th>
+        <th></th>
+    </tr>
+</table>
+<div th:each="s : ${tovars}" th:if="${s.prodano}==true">
+    <table class="table1">
+        <tr>
+            <td th:text="${s.nameTovar}"></td>
+            <td th:text="${s.costTovar}"></td>
+            <td th:text="${s.kolvoTovar}"></td>
+            <td th:text="${s.getPoctsvchik().namePoctsvchik}"></td>
+            <td th:text="${s.getLicenziya().nameOrganizaciya}"></td>
+            <td>
+                <form th:action="'/tovar/' + ${s.idTovar} + '/red'">
+                    <button class="btn btn-outline-light">Редактирование</button>
+                </form>
+                <form th:action="'/tovar/' + ${s.idTovar} + '/remove'">
+                    <button class="btn btn-outline-light">Удаление</button>
+                </form>
+                <form th:action="'/tovar/' + ${s.nameTovar} + '/prod'">
+                    <button class="btn btn-outline-light">Продажа</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+<style>
+    table.table1 {
+        font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+        font-size: 14px;
+        border-collapse: collapse;
+        text-align: center;
+        width: 100%;
+        table-layout: fixed;
+    }
+    table.table1 th, table.table1 td:first-child {
+        background: #2E8B57;
+        color: white;
+        padding: 10px 20px;
+        width: 200px;
+        padding: 3px 7px 2px 7px;
+    }
+    table.table1 th, table.table1 td {
+        border-style: solid;
+        border-width: 0 1px 1px 0;
+        border-color: white;
+        width: 200px;
+        padding: 3px 7px 2px 7px;
+        text-align: center;
+        word-wrap:break-word;
+    }
+    table.table1 td {
+        background: #3CB371;
+    }
+    table.table1 th:first-child, table.table1 td:first-child {
+        text-align: left;
+        word-wrap:break-word;
+        text-align: center;
+    }
+</style>
+</body>
+</html>

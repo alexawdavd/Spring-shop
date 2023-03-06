@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Регистрация</title>
+</head>
+<body>
+<p th:text="${message}"></p>
+<h1>Регистрация нового пользователя</h1>
+<form th:action="@{/registration}" method="post">
+    <label> Фамилия пользователя : <input type="text" name="firstName" class="textField"></label>
+    <br>
+    <label> Имя пользователя : <input type="text" name="lastName" class="textField"></label>
+    <br>
+    <label> Отчество пользователя : <input type="text" name="middleName" class="textField"></label>
+    <br>
+    <label> Логин пользователя : <input type="text" name="username" class="textField"></label>
+    <br>
+    <label> Пароль пользователя : <input type="password" name="password" class="textField"></label>
+    <br>
+    <input type="submit" value="Зарегистрироваться" class="btn btn-outline-success"/>
+</form>
+<style>
+    .textField {
+        width: 100%; /* Ширина поля */
+        padding: 1px; /* Поля */
+        box-sizing: border-box; /* Алгоритм расчёта ширины */
+        box-shadow: inset 0 1px 5px rgba(0,0,0,0.2); /* Тень внутри */
+        border: 1px solid #ccc; /* Параметры рамки */
+        color: #ff6d37; /* Цвет текста */
+    }
+</style>
+</body>
+</html>
